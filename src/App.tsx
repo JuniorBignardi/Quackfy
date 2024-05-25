@@ -1,15 +1,15 @@
-import { Dashboard } from './Components/Dashboard'
 import { Header } from './Components/Header'
-import { Search } from './Components/Search'
 import { GlobalStyle } from './styles/global'
+
+// reaproveitar a estrutura
+import { Outlet } from 'react-router-dom'
 
 function App() {
   return (
     <>
       <Header/>
-      <Search/>
-      <Dashboard/>
       <GlobalStyle/>
+      <Outlet />
     </>
   )
 }
