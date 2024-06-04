@@ -10,6 +10,8 @@ import Home from "./routes/Home.tsx";
 import ErrorPage from './routes/ErrorPage.tsx';
 import Quiz from './routes/Quiz.tsx';
 
+
+
 /*
 const router = createBrowserRouter([
   {
@@ -40,6 +42,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router= {router} />
+      <RouterProvider router= {router} />
   </React.StrictMode>,
 )

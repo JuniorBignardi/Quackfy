@@ -1,9 +1,15 @@
 import { Container } from "./styles";
 
-export function Question(){
+type Props = {
+    question: string;
+}
+
+const Question: React.FC<Props>= ({question}): JSX.Element => {
     return(
         <Container>
-            Quem morreu em 1987?
+            {question}
         </Container>
     )
 }
+
+export default Question;

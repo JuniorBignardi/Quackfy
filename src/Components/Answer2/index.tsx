@@ -1,9 +1,17 @@
 import { Container } from "./styles";
 
-export function Answer2(){
+
+type Props = {
+    letter: string;
+    answer: string;
+}
+
+const Answer2: React.FC<Props> = ({letter, answer}) =>{
     return(
         <Container>
-            B. Roberto Richards
+            {letter}. {answer}
         </Container>
     )
 }
+
+export default Answer2

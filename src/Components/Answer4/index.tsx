@@ -1,9 +1,19 @@
 import { Container } from "./styles";
 
-export function Answer4(){
+
+type Props = {
+    letter: string;
+    answer: string;
+}
+
+
+const Answer4: React.FC<Props> = ({letter, answer}) =>{
     return(
         <Container>
-            D. Enrique Cardoso
+            
+            {letter}. {answer}
         </Container>
     )
 }
+
+export default Answer4;

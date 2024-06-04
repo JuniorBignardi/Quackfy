@@ -5,7 +5,7 @@ export const Container = styled.div`
     text-align: center;
     
 
-    background-color: #2DB1C6;
+    background-color: #2C5951;
 
     font-size: 2.0rem;
     font-family: "Lexend", sans-serif;        
@@ -16,12 +16,16 @@ export const Container = styled.div`
     
     border-radius: 40px;
     width: 120vh;
-    height: 20vh;
+    height: 15vh;
 
     position: absolute;
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
 
+    p {
+        text-align: center;
+        margin-top: 35px;
+    }
 
 `;

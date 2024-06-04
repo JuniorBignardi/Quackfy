@@ -13,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     --card_small: 26;
     --card_medium: 39;
     --card_large: 45;
+    --grey: #393434;
 }   
 
 * {
