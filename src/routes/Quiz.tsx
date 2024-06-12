@@ -1,25 +1,44 @@
 import { useEffect } from "react";
 import Question from "../Components/Question";
-import Answer from "../Components/Answer";
-import Answer2 from "../Components/Answer2";
-import Answer3 from "../Components/Answer3";
-import Answer4 from "../Components/Answer4";
-import {api} from "../services/api"
+import { useQuiz, QuestionGet, QuestionResponse } from "../QuizContext";
 
 const Quiz = () => {
 
+    const {state, dispatch} = useQuiz();
+    console.log(state);
+
+    async function fetchQuestion() {
+        try {
+            dispatch({type: "setStatus", payload: "fetching"})
+            const response = await fetch('https://opentdb.com/api.php?amount=10&type=multiple');
+            let data : QuestionResponse = await(response.json())
+            if(data.response_code === 0){
+                let question : QuestionGet = data.results[0];
+
+                let randomIndex = Math.round(Math.random() * question.incorrect_answers.length)
+                question.incorrect_answers.splice(randomIndex,0,question.correct_answer)
+                
+                dispatch({type: "setStatus", payload: "ready"})
+                dispatch({type: "setQuestionGet", payload: question})
+            } else{
+            dispatch({type: "setStatus", payload: "error"})
+            }
+            console.log("data", data)
+        }catch (err){
+            console.log("error: ", err)
+        }
+        
+    }
+
     useEffect(() => {
-        api.get('')
-        .then(response=> console.log(response.data))
-    }, [])
+       if(state.gameStatus =='idle'){
+        fetchQuestion();
+       }
+    })
 
     return(
         <>
-        <Question question="abacaxi de banana"/>
-        <Answer letter="A" answer="abacaxi de banana"/>
-        <Answer2 letter="B" answer="abacaxi de banana"/>
-        <Answer3 letter="C" answer="abacaxi de banana"/>
-        <Answer4 letter="D" answer="abacaxi de banana"/>
+        <Question/>
         </>
     );
 };

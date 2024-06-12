@@ -14,6 +14,8 @@ export const GlobalStyle = createGlobalStyle`
     --card_medium: 39;
     --card_large: 45;
     --grey: #393434;
+    --correct: #31E077;
+    --incorrect: #F23030;
 }   
 
 * {
