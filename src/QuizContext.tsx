@@ -39,7 +39,7 @@ interface QuizState {
 
 type QuizAction = 
 {type: "setStatus"; payload: Status} | {type: "setQuestionGet"; payload: QuestionGet } | {type: "setUserAnswer", payload: string}
-| {type: "setScore"; payload:"correct" | "incorrect"}
+| {type: "setScore"; payload:"correct" | "incorrect"} | {type: "ResetScore"; payload: 0}
 
 const initialState :  QuizState = {
     gameStatus: "idle",
@@ -79,5 +79,10 @@ function QuizReducer(state: QuizState, action: QuizAction): QuizState{
             let score = state.score;
             score[action.payload] +=1;
             return {...state, score: score};
+        case "ResetScore":
+            let null_score = state.score;
+            null_score["correct"] = action.payload;
+            null_score["incorrect"] = action.payload;
+            return {...state,score: null_score};
     }
 }

@@ -1,3 +1,4 @@
+import ScoreBoard from "../Components/ScoreBoard";
 
 
 const Results = () =>{
@@ -7,7 +8,7 @@ const Results = () =>{
 
     return(
         <>
-
+            <ScoreBoard/>
         </>
     )
 }
