@@ -1,4 +1,5 @@
 import { Container, Content, Selector, Shadow } from "./styles"
+import medal from "../../assets/medal.svg"
 import { useQuiz } from "../../QuizContext";
 
 
@@ -13,6 +14,7 @@ export function ScoreBoard(){
             <div>
                 <p>RESULTADOS</p>
                 <Content>
+                    <img src={medal} alt="" />
                     <Shadow>
                         <p className="results">{state.score.correct/2}/5 Acertos</p>
                         {

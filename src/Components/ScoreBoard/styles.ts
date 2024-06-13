@@ -24,6 +24,14 @@ export const Content = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    img {
+        position: absolute;
+        z-index:1;
+        align-self:start;
+        margin-right: 250px;
+        width: 80px;
+    }
 `;
 
 export const Selector = styled.button`
