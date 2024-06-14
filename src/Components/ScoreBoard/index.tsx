@@ -1,12 +1,17 @@
 import { Container, Content, Selector, Shadow } from "./styles"
 import medal from "../../assets/medal.svg"
-import { useQuiz } from "../../QuizContext";
+import { useEffect } from "react";
+import { db } from "../../firebaseConfig";
+import firebase from "firebase/compat/app";
 
+export function ScoreBoard({score_correct,score_incorrect}:{score_correct:number,score_incorrect:number}){
 
-
-export function ScoreBoard(){
-
-    const {state,dispatch} = useQuiz();
+    useEffect(()=>{
+        var resultRef = db.collection('planos').doc('03H7ODzzudK5UnNm5zOX');
+        resultRef.update({
+            value: firebase.firestore.FieldValue.increment(((score_correct-score_incorrect)/2) *5)
+        });
+    },[])
 
     return(
         <>
@@ -16,14 +21,8 @@ export function ScoreBoard(){
                 <Content>
                     <img src={medal} alt="" />
                     <Shadow>
-                        <p className="results">{state.score.correct/2}/5 Acertos</p>
-                        {
-                            state.score.correct >= state.score.incorrect && <p className="points">+{(state.score.correct/2) *5} Pontos</p>
-                            
-                        }
-                        {
-                            state.score.correct < state.score.incorrect && <p className="points">-{(state.score.incorrect/2)* 5} Pontos</p>
-                        }
+                        <p className="results">{score_correct/2}/5 Acertos</p>
+                        <p className="points">{((score_correct-score_incorrect)/2) *5} Pontos</p>
                     </Shadow>
                 </Content>
             </div>
