@@ -1,12 +1,9 @@
 import { Container, Content, Selector, Shadow } from "./styles"
 import medal from "../../assets/medal.svg"
-import { useQuiz } from "../../QuizContext";
 
 
 
-export function ScoreBoard(){
-
-    const {state,dispatch} = useQuiz();
+export function ScoreBoard({score_correct,score_incorrect}:{score_correct:number,score_incorrect:number}){
 
     return(
         <>
@@ -16,14 +13,8 @@ export function ScoreBoard(){
                 <Content>
                     <img src={medal} alt="" />
                     <Shadow>
-                        <p className="results">{state.score.correct/2}/5 Acertos</p>
-                        {
-                            state.score.correct >= state.score.incorrect && <p className="points">+{(state.score.correct/2) *5} Pontos</p>
-                            
-                        }
-                        {
-                            state.score.correct < state.score.incorrect && <p className="points">-{(state.score.incorrect/2)* 5} Pontos</p>
-                        }
+                        <p className="results">{score_correct/2}/5 Acertos</p>
+                        <p className="points">{((score_correct-score_incorrect)/2) *5} Pontos</p>
                     </Shadow>
                 </Content>
             </div>

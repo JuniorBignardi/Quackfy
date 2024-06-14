@@ -33,8 +33,11 @@ const Answer: React.FC<Props> = ({letter, answer}) => {
         dispatch({type:"setStatus", payload:"answered"})
         setTimeout(() => {
             if(counter == 5){
-                navigate('/results')
+                let score_correct = state.score.correct;
+                let score_incorrect = state.score.incorrect;
+                navigate('/results',{state:{score_correct: score_correct,score_incorrect:score_incorrect}})
                 dispatch({type:"setStatus", payload:"idle"})
+                dispatch({type:"ResetScore",payload:0})
                 counter = 0;
             }else{
                 dispatch({type:"setStatus", payload:"idle"})
