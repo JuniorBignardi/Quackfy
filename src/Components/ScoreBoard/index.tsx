@@ -23,6 +23,8 @@ export function ScoreBoard({score_correct,score_incorrect}:{score_correct:number
                     <Shadow>
                         <p className="results">{score_correct/2}/5 Acertos</p>
                         <p className="points">{((score_correct-score_incorrect)/2) *5} Pontos</p>
+                        <p className="results">{score_correct/2}/5 Acertos</p>
+                        <p className="points">{((score_correct-score_incorrect)/2) *5} Pontos</p>
                     </Shadow>
                 </Content>
             </div>
