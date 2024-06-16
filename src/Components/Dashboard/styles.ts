@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.main`
     margin: 0 auto;
     padding: 0;
     width: 80vw;
@@ -21,7 +21,7 @@ export const Container = styled.div`
     scrollbar-color: var(--yellow) var(--background);
 `;
 
-export const Card_small = styled.div`
+export const Card_small = styled.article`
     padding: 0px;
     margin: 15px 10px;
     border-radius: var(--card_border_radius);
@@ -29,7 +29,7 @@ export const Card_small = styled.div`
     grid-row-end: span var(--card_small);
 `;
 
-export const Card_medium = styled.div`
+export const Card_medium = styled.article`
     padding: 0px;
     margin: 15px 10px;
     border-radius: var(--card_border_radius);
@@ -38,7 +38,7 @@ export const Card_medium = styled.div`
 
 `;
 
-export const Card_large = styled.div`
+export const Card_large = styled.article`
     padding: 0px;
     margin: 15px 10px;
     border-radius: var(--card_border_radius);

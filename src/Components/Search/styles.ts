@@ -2,7 +2,7 @@ import styled from "styled-components";
 import search from "../../assets/search.svg"
 
 
-export const Container = styled.div`
+export const Container = styled.section`
     text-align: center;
     height: 20vh;
     

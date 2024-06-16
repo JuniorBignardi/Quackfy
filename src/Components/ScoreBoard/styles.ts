@@ -6,13 +6,18 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     margin-top: 80px;
-    font-size: 3.5rem;
+    font-size: 1rem;
     font-family: "Lexend", sans-serif;        
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
     color: white;
     gap: 20px;
+
+    h1 {
+        font-size: 3.5rem;
+    }
+
 `;
 
 export const Content = styled.div`
@@ -43,7 +48,7 @@ export const Selector = styled.button`
     background-color: var(--red);
 `;
 
-export const Shadow = styled.div`
+export const Shadow = styled.main`
     width: 90%;
     height: 88%;
     background-color: #3A3B08;

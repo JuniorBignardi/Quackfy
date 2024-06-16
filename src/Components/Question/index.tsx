@@ -12,9 +12,16 @@ export function Question(){
     return(
         <>
         <Container>
-                 <div className="questao">
+                <div className="question-number">
+                    <a  className="first" href="">1</a>
+                    <a href="">2</a>
+                    <a href="">3</a>
+                    <a href="">4</a>
+                    <a href="">5</a>
+                </div>
+                 <main className="questao">
                     <p>{decode(state.question?.question)}</p>
-                 </div>
+                 </main>
                 <div className="options">
                     {state.question?.incorrect_answers.map(function(answer,indice){
                         return(

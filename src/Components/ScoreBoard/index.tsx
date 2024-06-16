@@ -17,9 +17,9 @@ export function ScoreBoard({score_correct,score_incorrect}:{score_correct:number
         <>
         <Container>
             <div>
-                <p>RESULTADOS</p>
+                <h1>RESULTADOS</h1>
                 <Content>
-                    <img src={medal} alt="" />
+                    <img src={medal} alt="imagem de uma medalha" />
                     <Shadow>
                         <p className="results">{score_correct/2}/5 Acertos</p>
                         <p className="points">{((score_correct-score_incorrect)/2) *5} Pontos</p>

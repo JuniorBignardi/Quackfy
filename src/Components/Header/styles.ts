@@ -35,7 +35,7 @@ export const Content = styled.div`
 
     }
 
-    .left {
+    .right {
         display: flex;
         align-items: center;
     }
