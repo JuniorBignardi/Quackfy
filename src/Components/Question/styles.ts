@@ -16,6 +16,17 @@ export const Container = styled.div`
         gap: 9px;
     }
 
+    .correct {
+            background-color: var(--correct);
+            color: white;
+            
+        }
+
+    .incorrect {
+            background-color: var(--incorrect);
+            color: white;
+        }
+
     .question-number {
         
     
@@ -95,5 +106,47 @@ export const Container = styled.div`
         gap: 25px;
     }
 
+
+`;
+
+export const Content = styled.div`
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    
+    text-align: left;
+    background-color: #00221C;
+
+    font-size: 2.0rem;
+    font-family: "Lexend", sans-serif;        
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    color: white;
+    
+    width: 50vw;
+    max-width: 50vw;
+    min-height: 8vh;
+
+
+    cursor: pointer;
+
+        &.correct {
+            background-color: var(--correct)
+        }
+
+        &.incorrect {
+            background-color: var(--incorrect)
+        }
+
+    p {
+        width: 100%;
+        text-align: left;
+        margin-top: 5px;
+        margin-left: 20px;
+        min-height: 8vh;
+    }
 
 `;

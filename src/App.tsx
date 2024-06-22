@@ -14,23 +14,24 @@ function App() {
   const [isNewUserOpen, setIsNewUserOpen] = useState(false);
 
   function handleOpenNewUserModal(){
-      setIsNewUserOpen(true)
+      setIsNewUserOpen(true);
   }
 
   function handleCloseNewUserModal(){
-      setIsNewUserOpen(false)
+      setIsNewUserOpen(false);
   }
 
 
   const [isNewRegisterOpen, setIsNewRegisterOpen] = useState(false);
 
   function handleOpenNewRegisterModal(){
-      setIsNewRegisterOpen(true)
+    setIsNewUserOpen(false);  
+    setIsNewRegisterOpen(true);
   }
 
   function handleCloseNewRegisterModal(){
-      setIsNewRegisterOpen(false)
-      setIsNewUserOpen(false)
+      setIsNewRegisterOpen(false);
+      setIsNewUserOpen(false);
   }
 
 

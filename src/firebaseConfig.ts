@@ -7,13 +7,7 @@ import 'firebase/compat/firestore';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyAmK2WY_621WJm_1JVxFe9cpcm8KxCawaM",
-    authDomain: "quackfy-quiz.firebaseapp.com",
-    projectId: "quackfy-quiz",
-    storageBucket: "quackfy-quiz.appspot.com",
-    messagingSenderId: "839679735943",
-    appId: "1:839679735943:web:d1c54bf9c2249e9eb6a022",
-    measurementId: "G-BR4LHJEDKG"
+    projectId: ""
 };
 
 // Initialize Firebase

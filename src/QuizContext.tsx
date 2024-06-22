@@ -1,5 +1,11 @@
 import { createContext, useContext, useReducer } from "react";
 
+interface AnswerHistory{
+    questionIndex: number;
+    isCorrect: boolean;
+}
+
+
 
 export interface QuestionGet{
     category: string;
@@ -8,6 +14,7 @@ export interface QuestionGet{
     question: string;
     correct_answer: string;
     incorrect_answers: string[];
+    answerHistory: AnswerHistory[];
 
 }
 
@@ -32,20 +39,25 @@ type Status = "idle"|"fetching"|"ready"|"error"|"answered";
 
 interface QuizState {
     gameStatus: Status,
-    question: QuestionGet|null,
+    questions: QuestionGet[],
+    currentQuestionIndex: number,
     userAnswer: string|null,
     score: Score,
+    answerHistory: AnswerHistory[];
 };
 
 type QuizAction = 
-{type: "setStatus"; payload: Status} | {type: "setQuestionGet"; payload: QuestionGet } | {type: "setUserAnswer", payload: string}
-| {type: "setScore"; payload:"correct" | "incorrect"} | {type: "ResetScore"; payload: 0}
+{type: "setStatus"; payload: Status} | {type: "setQuestionGet"; payload: QuestionGet[] } | {type: "setUserAnswer", payload: string}
+| {type: "setScore"; payload:"correct" | "incorrect"} |{type:"nextQuestion"} | {type: "ResetScore"; payload: 0} | {type: "addAnswerHistory";payload: AnswerHistory}
+| {type: "resetQuiz"};
 
 const initialState :  QuizState = {
     gameStatus: "idle",
-    question: null,
+    questions: [],
+    currentQuestionIndex: 0,
     userAnswer: null,
     score: {correct: 0, incorrect:0},
+    answerHistory: [],
 }
 
 const QuizContext = createContext<QuizContext>({
@@ -72,17 +84,23 @@ function QuizReducer(state: QuizState, action: QuizAction): QuizState{
         case "setStatus":
             return {...state, gameStatus: action.payload};
         case "setQuestionGet":
-            return {...state, question: action.payload};
+            return {...state, questions: action.payload,currentQuestionIndex: 0};
         case "setUserAnswer":
             return {...state, userAnswer: action.payload};
         case "setScore":
             let score = state.score;
             score[action.payload] +=1;
             return {...state, score: score};
+        case "nextQuestion":
+            return {...state, currentQuestionIndex: state.currentQuestionIndex + 1, userAnswer: null}
         case "ResetScore":
             let null_score = state.score;
             null_score["correct"] = action.payload;
             null_score["incorrect"] = action.payload;
             return {...state,score: null_score};
+        case "resetQuiz":
+            return {...initialState};
+        case "addAnswerHistory":
+            return {...state,answerHistory: [...state.answerHistory, action.payload]};
     }
 }

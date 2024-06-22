@@ -1,25 +1,29 @@
 import { useEffect } from "react";
 import Question from "../Components/Question";
-import { useQuiz, QuestionGet, QuestionResponse } from "../QuizContext";
+import { useQuiz, QuestionResponse } from "../QuizContext";
+import { useParams } from "react-router-dom";
 
 const Quiz = () => {
+
+    const {category, difficulty} = useParams();
+
 
     const {state, dispatch} = useQuiz();
     console.log(state);
 
-    async function fetchQuestion() {
+    async function fetchQuestion(category:any,difficulty:any) {
         try {
             dispatch({type: "setStatus", payload: "fetching"})
-            const response = await fetch('https://opentdb.com/api.php?amount=10&type=multiple');
+            const response = await fetch(`https://opentdb.com/api.php?amount=5&category=${category}&difficulty=${difficulty}&type=multiple`);
             let data : QuestionResponse = await(response.json())
             if(data.response_code === 0){
-                let question : QuestionGet = data.results[0];
-
-                let randomIndex = Math.round(Math.random() * question.incorrect_answers.length)
-                question.incorrect_answers.splice(randomIndex,0,question.correct_answer)
-                
+                const questions = data.results.map((question)=>{
+                    let randomIndex = Math.round(Math.random() * question.incorrect_answers.length)
+                    question.incorrect_answers.splice(randomIndex,0,question.correct_answer)
+                    return question;
+                })
+                dispatch({type: "setQuestionGet",payload:questions});
                 dispatch({type: "setStatus", payload: "ready"})
-                dispatch({type: "setQuestionGet", payload: question})
             } else{
             dispatch({type: "setStatus", payload: "error"})
             }
@@ -32,9 +36,16 @@ const Quiz = () => {
 
     useEffect(() => {
        if(state.gameStatus =='idle'){
-        fetchQuestion();
+        fetchQuestion(category,difficulty);
        }
-    })
+
+       return () =>{
+            dispatch({type: "resetQuiz"});
+            dispatch({type: "setStatus",payload:"idle"});
+            dispatch({type: "ResetScore",payload:0})
+
+       }
+    },[category,difficulty]);
 
     return(
         <>

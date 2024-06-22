@@ -3,6 +3,7 @@ import medal from "../../assets/medal.svg"
 import { useEffect } from "react";
 import { db } from "../../firebaseConfig";
 import firebase from "firebase/compat/app";
+import confetti from "https://cdn.skypack.dev/canvas-confetti";
 
 export function ScoreBoard({score_correct,score_incorrect}:{score_correct:number,score_incorrect:number}){
 
@@ -12,6 +13,8 @@ export function ScoreBoard({score_correct,score_incorrect}:{score_correct:number
             value: firebase.firestore.FieldValue.increment(((score_correct-score_incorrect)/2) *5)
         });
     },[])
+
+    confetti()
 
     return(
         <>

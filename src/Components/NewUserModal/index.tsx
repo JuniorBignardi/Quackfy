@@ -25,13 +25,13 @@ export function NewUserModal({isOpen,onRequestClose, handle}:NewUserModalProps){
                <div>
                <label htmlFor="">E-mail:</label>
                <br />
-                <input type="text" name="femail" id="feamil" placeholder="Endereço de e-mail"/>
+                <input type="text" id="femail" placeholder="Endereço de e-mail"/>
                </div>
 
                 <div>
                     <label htmlFor="">Senha:</label>
                     <br />
-                    <input type="text" name="fsenha" id="fsenha" placeholder="Senha" />
+                    <input type="text" id="fsenha" placeholder="Senha" />
                 </div>
 
                 <button  className="entrar" type="submit">Entrar</button>

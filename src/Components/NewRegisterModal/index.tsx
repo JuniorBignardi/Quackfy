@@ -24,25 +24,25 @@ export function NewRegisterModal({isOpen,onRequestClose}:NewRegisterModalProps){
                 <div>
                <label htmlFor="">Nome Completo:</label>
                <br />
-                <input type="text" name="fname" id="fname" placeholder="Nome Completo"/>
+                <input type="text" id="fname" placeholder="Nome Completo"/>
                </div>
 
                <div>
                <label htmlFor="">E-mail:</label>
                <br />
-                <input type="text" name="femail" id="femailregister" placeholder="Endereço de e-mail"/>
+                <input type="text" id="femailregister" placeholder="Endereço de e-mail"/>
                </div>
 
                 <div>
                     <label htmlFor="">Senha:</label>
                     <br />
-                    <input type="text" name="fsenha" id="fsenharegister" placeholder="Senha" />
+                    <input type="text" id="fsenharegister" placeholder="Senha" />
                 </div>
                 
                 <div>
                     <label htmlFor="">Confirme sua senha:</label>
                     <br />
-                    <input type="text" name="fsenhaconfirm" id="fsenhaconfirmregister" placeholder="Senha" />
+                    <input type="text" id="fsenhaconfirmregister" placeholder="Senha" />
                 </div>
 
                 <button  className="cadastrar" type="submit">Cadastrar-se</button>
