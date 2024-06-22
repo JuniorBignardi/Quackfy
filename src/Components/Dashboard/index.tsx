@@ -2,10 +2,13 @@ import {Container} from "./styles";
 import { Card_small } from "../Card_small";
 import { Card_large } from "../Card_large";
 import { Card_medium } from "../Card_medium";
+import { Search } from "../Search";
+import { useState } from "react";
 
 
 
 export function Dashboard(){
+    const [search, setSearch] = useState('');
 
 const categories = [
     {name: 'Cotidiano', value: 9},
@@ -51,8 +54,16 @@ const components = [
 const shuffledCategories = shuffleArray(categories);
 
     return(
+        <>
+        <Search search={search} setSearch={setSearch} />
         <Container>
-            {shuffledCategories.map((item:any,index:any)=>{
+            {shuffledCategories.filter((category:any)=>{
+                if(search === ''){
+                    return true;
+                } else{
+                    return category.name.toLowerCase().includes(search.toLowerCase());
+                }
+            }).map((item:any,index:any)=>{
                 const Component = components[Math.floor(Math.random()*components.length)].component;
                 const difficulty_level = difficulty[Math.floor(Math.random()*difficulty.length)]
                 return (
@@ -60,5 +71,6 @@ const shuffledCategories = shuffleArray(categories);
                 )
             })}
         </Container>
+        </>
     )
 }
