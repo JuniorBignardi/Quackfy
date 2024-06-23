@@ -13,6 +13,7 @@ const Quiz = () => {
 
     async function fetchQuestion(category:any,difficulty:any) {
         try {
+            console.log("eu to aqui")
             dispatch({type: "setStatus", payload: "fetching"})
             const response = await fetch(`https://opentdb.com/api.php?amount=5&category=${category}&difficulty=${difficulty}&type=multiple`);
             let data : QuestionResponse = await(response.json())
@@ -25,7 +26,7 @@ const Quiz = () => {
                 dispatch({type: "setQuestionGet",payload:questions});
                 dispatch({type: "setStatus", payload: "ready"})
             } else{
-            dispatch({type: "setStatus", payload: "error"})
+                dispatch({type: "setStatus", payload: "error"})
             }
             console.log("data", data)
         }catch (err){
@@ -49,7 +50,7 @@ const Quiz = () => {
 
     return(
         <>
-        <Question/>
+        {<Question/>}
         </>
     );
 };
