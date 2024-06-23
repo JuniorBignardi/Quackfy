@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import search from "../../assets/search.svg"
+import search from "/search.svg"
 
 
 export const Container = styled.section`

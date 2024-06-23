@@ -14,6 +14,7 @@ export function ScoreBoard({score_correct,score_incorrect}:{score_correct:number
     },[])
 
 
+
     return(
         <>
         <Container>

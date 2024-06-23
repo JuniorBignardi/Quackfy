@@ -1,6 +1,7 @@
 import { Container } from "./styles";
 
 
+
 export function Search({search, setSearch}:{search: any, setSearch: any}){
     return(
         <Container>

@@ -1,9 +1,9 @@
 import logoImg from '../../assets/Logo.svg'
 import { Container, Content } from './styles'
-import profile from '../../assets/profile.svg'
+import profile from "../../assets/profile.svg"
 import { Link } from 'react-router-dom'
 
-
+ 
 interface HeaderProps{
     handleOpenNewUserModal: ()=>void;
 }
