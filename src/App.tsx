@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { NewUserModal } from './Components/NewUserModal'
 import { NewRegisterModal } from './Components/NewRegisterModal'
+import { ToastContainer } from 'react-toastify'
 
 Modal.setAppElement('#root');
 
@@ -45,6 +46,7 @@ function App() {
 
       <GlobalStyle/>
       <Outlet />
+      <ToastContainer/>
     </>
   )
 }
