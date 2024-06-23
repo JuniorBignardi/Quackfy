@@ -9,7 +9,7 @@ export function ScoreBoard({score_correct,score_incorrect}:{score_correct:number
     useEffect(()=>{
         var resultRef = db.collection('planos').doc('03H7ODzzudK5UnNm5zOX');
         resultRef.update({
-            value: firebase.firestore.FieldValue.increment(((score_correct-score_incorrect)/2) *5)
+            value: firebase.firestore.FieldValue.increment(((score_correct-score_incorrect)) *5)
         });
     },[])
 
@@ -24,7 +24,7 @@ export function ScoreBoard({score_correct,score_incorrect}:{score_correct:number
                     <img src={medal} alt="imagem de uma medalha" />
                     <Shadow>
                         <p className="results">{score_correct/2}/5 Acertos</p>
-                        <p className="points">{((score_correct-score_incorrect)/2) *5} Pontos</p>
+                        <p className="points">{((score_correct-score_incorrect)) *5} Pontos</p>
                     </Shadow>
                 </Content>
             </div>
