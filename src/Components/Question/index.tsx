@@ -2,7 +2,6 @@ import { useQuiz } from "../../QuizContext";
 import { Container, Content } from "./styles";
 import { decode } from "html-entities";
 import { useNavigate } from "react-router-dom";
-import confetti from "https://cdn.skypack.dev/canvas-confetti";
 import correctsound from "/sounds/bonus-points-190035.mp3"
 import incorrectsound from "/sounds/273643-Negative-alert-3.wav"
 
@@ -28,7 +27,6 @@ export function Question(){
         if(isCorrect){
             dispatch({type: "setScore", payload: "correct"});
             correctAnswerAudio.play();
-            confetti();
         }else{
             dispatch({type:"setScore",payload: "incorrect"});
             incorrectAnswerAudio.play();
@@ -60,6 +58,7 @@ export function Question(){
         <Container>
                 <div className="question-number">
                     {state.questions.map((question,index)=>{
+                        console.log(question)
                         const history = state.answerHistory.find((h)=>h.questionIndex===index);
                         let className = "";
                         if(history){
