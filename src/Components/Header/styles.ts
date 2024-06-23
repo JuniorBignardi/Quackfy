@@ -12,6 +12,37 @@ export const Content = styled.div`
     align-items: center;
     justify-content: space-between;
 
+
+    .dropdown{
+        position: relative;
+        display: inline-block;
+
+    
+    
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        border: 0;
+        background: white;
+        color: black;
+        border-radius: 0;
+        min-width: 80px;
+        z-index: 1;
+    }
+
+    .dropdown-content p{
+        padding: 12px 16px;
+        display: block;
+    }
+
+
+        &:hover .dropdown-content {
+            display: block;
+        }
+    }
+    
+
+
     button {
         font-size: 1rem;
         font-family: "Lexend", sans-serif;

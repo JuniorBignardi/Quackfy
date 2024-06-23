@@ -46,7 +46,6 @@ export function Question(){
                 dispatch({type:"ResetScore",payload:0})
             }else{
                 dispatch({type: "nextQuestion"});
-                dispatch({type:"setStatus", payload:"idle"})
             }
         }, 1000);
 

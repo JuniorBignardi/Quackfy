@@ -42,7 +42,7 @@ const Quiz = () => {
        return () =>{
             dispatch({type: "resetQuiz"});
             dispatch({type: "setStatus",payload:"idle"});
-            dispatch({type: "ResetScore",payload:0})
+            dispatch({type: "ResetScore",payload:0});
 
        }
     },[category,difficulty]);
