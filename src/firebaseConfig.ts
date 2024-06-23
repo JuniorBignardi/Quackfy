@@ -1,10 +1,9 @@
 // Import the functions you need from the SDKs you need
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
-import { getAuth, onAuthStateChanged, updateProfile } from "firebase/auth";
+import { getAuth, updateProfile } from "firebase/auth";
 import { initializeApp } from 'firebase/app';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
-import { useEffect, useState } from 'react';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -46,6 +45,7 @@ export async function upload(file: any, currentUser: any, setLoading:  any) {
 
     setLoading(true);
     const snapshot = await uploadBytes(fileRef, file);
+    console.log(snapshot);
 
     const photoURL = await getDownloadURL(fileRef);
 

@@ -93,7 +93,7 @@ export const Content = styled.div`
     }
 
     progress {
-        widht: 50px;
+        width: 50px;
     }
     
 `;

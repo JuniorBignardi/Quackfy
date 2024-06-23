@@ -12,11 +12,17 @@ interface HeaderProps{
     handleOpenNewUserModal: ()=>void;
 }
 
+interface userDetails{
+    email: string;
+    name: string;
+    value: number;
+}
+
 
 export function Header({handleOpenNewUserModal}:HeaderProps){
     const user = auth.currentUser;
 
-    const [userDetails, setUserDetails] = useState(null);
+    const [userDetails, setUserDetails] = useState<userDetails | null>(null);
     const [photo, setPhoto] = useState(null);
     const [loading, setLoading] = useState(false);
     const [photoURL, setPhotoURL] = useState('https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0=')
@@ -66,7 +72,8 @@ export function Header({handleOpenNewUserModal}:HeaderProps){
             const docSnap = await getDoc(docRef);
             
             if(docSnap.exists()) {
-                setUserDetails(docSnap.data());
+                setUserDetails(docSnap.data() as userDetails);
+                console.log("eu to aq")
                 console.log(docSnap.data());
             } else {
                 console.log("Usuário deslogado");
