@@ -41,7 +41,21 @@ export const Content = styled.div`
         }
     }
     
+    .desktop{
 
+    @media (max-width: 720px){
+        display: none;
+    }
+
+    }
+
+    .mobile{
+        display: none;
+
+        @media (max-width: 720px){
+            display: block;
+        }
+    }
 
     button {
         font-size: 1rem;
@@ -57,8 +71,7 @@ export const Content = styled.div`
         width: 120px;
         height: 40px;
         padding: 0;
-        margin-right: 2rem;
-        margin-left: 2.5rem;
+        margin-right: 1rem;
 
         &:hover {
             filter: brightness(0.9)
@@ -69,6 +82,7 @@ export const Content = styled.div`
     .right {
         display: flex;
         align-items: center;
+        gap: 30px;
     }
     
     .profile {

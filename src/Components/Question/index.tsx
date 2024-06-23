@@ -4,6 +4,7 @@ import { decode } from "html-entities";
 import { useNavigate } from "react-router-dom";
 import correctsound from "/sounds/bonus-points-190035.mp3"
 import incorrectsound from "/sounds/273643-Negative-alert-3.wav"
+import { Loading } from "../Loading";
 
 
 
@@ -50,7 +51,7 @@ export function Question(){
     }
 
     if(!currentQuestion){
-        return <div>carregando</div>
+        return <Loading/>
     }
 
     return(
