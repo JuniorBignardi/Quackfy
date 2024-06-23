@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.article`
+export const Container = styled.button`
     padding: 0px;
     margin: 15px 10px;
     border-radius: var(--card_border_radius);
