@@ -1,19 +1,20 @@
 import { Container, Content, Selector, Shadow } from "./styles"
 import medal from "../../assets/medal.svg"
 import { useEffect } from "react";
-import { db } from "../../firebaseConfig";
+import { auth, db } from "../../firebaseConfig";
 import firebase from "firebase/compat/app";
 
 export function ScoreBoard({score_correct,score_incorrect}:{score_correct:number,score_incorrect:number}){
 
     useEffect(()=>{
-        var resultRef = db.collection('planos').doc('03H7ODzzudK5UnNm5zOX');
-        resultRef.update({
-            value: firebase.firestore.FieldValue.increment(((score_correct-score_incorrect)) *5)
-        });
+        const user = auth.currentUser
+        if(user != null){
+            var resultRef = db.collection('Users').doc(user.uid);
+            resultRef.update({
+                value: firebase.firestore.FieldValue.increment((score_correct-score_incorrect) *5)
+            });
+        }
     },[])
-
-
 
     return(
         <>
@@ -23,8 +24,8 @@ export function ScoreBoard({score_correct,score_incorrect}:{score_correct:number
                 <Content>
                     <img src={medal} alt="imagem de uma medalha" />
                     <Shadow>
-                        <p className="results">{score_correct/2}/5 Acertos</p>
-                        <p className="points">{((score_correct-score_incorrect)) *5} Pontos</p>
+                        <p className="results">{score_correct}/5 Acertos</p>
+                        <p className="points">{(score_correct-score_incorrect) *5} Pontos</p>
                     </Shadow>
                 </Content>
             </div>

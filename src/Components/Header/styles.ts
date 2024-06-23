@@ -23,14 +23,14 @@ export const Content = styled.div`
         display: none;
         position: absolute;
         border: 0;
-        background: white;
+        background: none;
         color: black;
         border-radius: 0;
         min-width: 80px;
         z-index: 1;
     }
 
-    .dropdown-content p{
+    .dropdown-content button{
         padding: 12px 16px;
         display: block;
     }
@@ -43,7 +43,7 @@ export const Content = styled.div`
     
 
 
-    button {
+    .criarQuiz {
         font-size: 1rem;
         font-family: "Lexend", sans-serif;
         font-optical-sizing: auto;
@@ -76,6 +76,10 @@ export const Content = styled.div`
         width: 48px;
         height: 48px;
         border-radius: 50%;;
+    }
+
+    progress {
+        widht: 50px;
     }
     
 `;

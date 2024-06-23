@@ -71,7 +71,7 @@ export const Container = styled.form`
 
     .quackfy{
         position:absolute;
-        margin-bottom: 620px;
+        margin-bottom: 510px;
         width: 100px;
         height: 100px;
     }
