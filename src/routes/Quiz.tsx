@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Question from "../Components/Question";
 import { useQuiz, QuestionResponse } from "../QuizContext";
 import { useParams } from "react-router-dom";
+import { Loading } from "../Components/Loading";
 
 const Quiz = () => {
 
@@ -27,6 +28,9 @@ const Quiz = () => {
                 dispatch({type: "setStatus", payload: "ready"})
             } else{
                 dispatch({type: "setStatus", payload: "error"})
+                setTimeout(() => {
+                    fetchQuestion(category,difficulty)
+                },5000);
             }
             console.log("data", data)
         }catch (err){
@@ -50,7 +54,7 @@ const Quiz = () => {
 
     return(
         <>
-        {<Question/>}
+        {state.gameStatus === "ready" ||state.gameStatus === "answered" ? <Question/> : <Loading/> }
         </>
     );
 };
