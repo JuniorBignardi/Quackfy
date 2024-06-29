@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import correctsound from "/sounds/bonus-points-190035.mp3"
 import incorrectsound from "/sounds/273643-Negative-alert-3.wav"
 import { Loading } from "../Loading";
-import { createClient } from 'pexels';
 
 
 // All requests made with the client will be authenticated
