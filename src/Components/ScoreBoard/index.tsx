@@ -8,14 +8,30 @@ import { useNavigate } from "react-router-dom";
 export function ScoreBoard({score_correct,score_incorrect}:{score_correct:number,score_incorrect:number}){
 
     const navigate = useNavigate()
-
+    const user = auth.currentUser
+    
+    var bool = false
+    if(user == null){
+        var bool = true;
+    }
+    
     useEffect(()=>{
-        const user = auth.currentUser
+        
         if(user != null){
             var resultRef = db.collection('Users').doc(user.uid);
-            resultRef.update({
-                value: firebase.firestore.FieldValue.increment((score_correct-score_incorrect) *5)
-            });
+            resultRef.get().then((doc) => {
+                if(doc.exists){
+                    resultRef.update({
+                        value: firebase.firestore.FieldValue.increment((score_correct-score_incorrect) *5)
+                    });
+                    if(doc.data()?.value < 0)
+                        resultRef.update({
+                            value: 0
+                        }); 
+                }
+            }).catch((error) => {
+                console.log("Error", error);
+            })  
         }
     },[])
 
@@ -33,7 +49,7 @@ export function ScoreBoard({score_correct,score_incorrect}:{score_correct:number
                 </Content>
             </div>
             <Selector>Reiniciar Quiz</Selector>
-            <Selector onClick={()=>navigate('/ranking')}>Ranking</Selector>
+            <Selector disabled={bool || !user} onClick={()=>navigate('/ranking') }>Ranking</Selector>
         </Container>
         </>
     )

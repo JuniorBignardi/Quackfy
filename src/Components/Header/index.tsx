@@ -38,33 +38,6 @@ export function Header({handleOpenNewUserModal}:HeaderProps){
 
     }
 
-/*
-    const handleUpload = (e: any) => {
-        const file = e.target[0]?.files[0]
-        if(!file)
-            return;
-        if(user){
-            const storageRef = ref(storage, `imagem/${user.uid}/${file.name}`)
-            const uploadTask = uploadBytesResumable(storageRef, file)
-
-            uploadTask.on(
-                "state_changed",
-                snapshot => {
-                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                    setProgress(progress)
-                },
-                error => {
-                    alert(error)
-                },
-                () => {
-                    getDownloadURL(uploadTask.snapshot.ref).then(url  => {
-                        setPhotoURL(url)
-                    })
-                }
-            )
-        }
-}  
-*/
     const fetchUserData=async()=>{
         auth.onAuthStateChanged(async(user: any)=>{
             console.log(user);
@@ -73,7 +46,6 @@ export function Header({handleOpenNewUserModal}:HeaderProps){
             
             if(docSnap.exists()) {
                 setUserDetails(docSnap.data() as userDetails);
-                console.log("eu to aq")
                 console.log(docSnap.data());
             } else {
                 console.log("Usuário deslogado");
