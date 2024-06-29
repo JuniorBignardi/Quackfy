@@ -11,6 +11,7 @@ import ErrorPage from './routes/ErrorPage.tsx';
 import Quiz from './routes/Quiz.tsx';
 import { QuizProvider } from './QuizContext.tsx';
 import Results from './routes/Results.tsx'
+import Rank from './routes/Ranking.tsx';
 
 
 
@@ -42,13 +43,17 @@ const router = createBrowserRouter([
           path: "/results",
           element: <Results/>
       },
+      {
+        path: "/ranking",
+        element: <Rank/>
+      }
     ]
   }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-      <QuizProvider>
+    <QuizProvider>
         <RouterProvider router= {router} />
       </QuizProvider>
   </React.StrictMode>,

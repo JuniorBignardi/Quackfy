@@ -3,8 +3,11 @@ import medal from "../../assets/medal.svg"
 import { useEffect } from "react";
 import { auth, db } from "../../firebaseConfig";
 import firebase from "firebase/compat/app";
+import { useNavigate } from "react-router-dom";
 
 export function ScoreBoard({score_correct,score_incorrect}:{score_correct:number,score_incorrect:number}){
+
+    const navigate = useNavigate()
 
     useEffect(()=>{
         const user = auth.currentUser
@@ -30,7 +33,7 @@ export function ScoreBoard({score_correct,score_incorrect}:{score_correct:number
                 </Content>
             </div>
             <Selector>Reiniciar Quiz</Selector>
-            <Selector>Ranking</Selector>
+            <Selector onClick={()=>navigate('/ranking')}>Ranking</Selector>
         </Container>
         </>
     )

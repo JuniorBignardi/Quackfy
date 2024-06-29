@@ -8,6 +8,7 @@ import { useState } from "react";
 
 
 export function Dashboard(){
+
     const [search, setSearch] = useState('');
 
 const categories = [

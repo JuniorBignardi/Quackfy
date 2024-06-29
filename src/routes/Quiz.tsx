@@ -12,6 +12,7 @@ const Quiz = () => {
     const {state, dispatch} = useQuiz();
     console.log(state);
 
+
     async function fetchQuestion(category:any,difficulty:any) {
         try {
             console.log("eu to aqui")

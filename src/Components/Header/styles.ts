@@ -87,8 +87,8 @@ export const Content = styled.div`
     
     .profile {
         margin-top: 6px;
-        width: 48px;
-        height: 48px;
+        width: 50px;
+        height: 50px;
         border-radius: 50%;;
     }
 
