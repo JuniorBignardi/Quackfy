@@ -53,4 +53,5 @@ export async function upload(file: any, currentUser: any, setLoading:  any) {
 
     setLoading(false);
     alert("Uploading file!");
+    window.location.href="/";
 }
