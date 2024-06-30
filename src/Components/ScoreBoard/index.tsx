@@ -5,7 +5,7 @@ import { auth, db } from "../../firebaseConfig";
 import firebase from "firebase/compat/app";
 import { useNavigate } from "react-router-dom";
 
-export function ScoreBoard({score_correct,score_incorrect}:{score_correct:number,score_incorrect:number}){
+export function ScoreBoard({score_correct}:{score_correct:number}){
 
     const navigate = useNavigate()
     const user = auth.currentUser
@@ -22,7 +22,7 @@ export function ScoreBoard({score_correct,score_incorrect}:{score_correct:number
             resultRef.get().then((doc) => {
                 if(doc.exists){
                     resultRef.update({
-                        value: firebase.firestore.FieldValue.increment((score_correct-score_incorrect) *5)
+                        value: firebase.firestore.FieldValue.increment((score_correct) *5)
                     });
                     if(doc.data()?.value < 0)
                         resultRef.update({
@@ -44,7 +44,7 @@ export function ScoreBoard({score_correct,score_incorrect}:{score_correct:number
                     <img src={medal} alt="imagem de uma medalha" />
                     <Shadow>
                         <p className="results">{score_correct}/5 Acertos</p>
-                        <p className="points">{(score_correct-score_incorrect) *5} Pontos</p>
+                        <p className="points">{(score_correct) *5} Pontos</p>
                     </Shadow>
                 </Content>
             </div>

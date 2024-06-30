@@ -2,7 +2,6 @@ import { Container, Content } from "./styles";
 import { useEffect, useState } from "react";
 import { auth, db, storage } from "../../firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
-import { Loading } from "../Loading";
 import { getDownloadURL, ref } from "firebase/storage";
 
 interface userDetails{
@@ -13,7 +12,7 @@ interface userDetails{
 
 export function Rank(){
 
-    const [others_array, setOthers_array] = useState<Array<{profilepic: any, name: any, pontuação: any}>>([
+    const [others_array, setOthers_array] = useState<Array<{profilepic: any, name: any, pontuação: any, url: any}>>([
     ]);
     const user = auth.currentUser;
     
@@ -22,6 +21,7 @@ export function Rank(){
     const [photoURL, setPhotoURL] = useState('https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0=')
     const [nome, setNome] = useState(null);
     const [pontuacao, setPontuacao] = useState(null);
+    var cont = 0;
 
     const fetchUserData=async()=>{
         auth.onAuthStateChanged(async(user: any)=>{
@@ -37,6 +37,12 @@ export function Rank(){
             }
         });
     };
+
+    for(var i = 0; i < others_array.length; i++)
+        if(others_array[i].url == user?.uid){
+            cont = i+1; 
+    }
+
     useEffect(()=>{
         if (user?.photoURL) {
             setPhotoURL(user.photoURL)
@@ -67,7 +73,7 @@ export function Rank(){
                 const promise = getDownloadURL(ref(storage, 'imagem/' + doc.id + '.png')).then((photoRef) => {
                     // doc.data() is never undefined for query doc snapshots
                     console.log(doc.id, " => ", doc.data().name);
-                    return {profilepic: photoRef, name: doc.data()?.name, pontuação: doc.data()?.value};
+                    return {profilepic: photoRef, name: doc.data()?.name, pontuação: doc.data()?.value, url: doc.id};
                 });
                 promises.push(promise);
             });
@@ -80,15 +86,22 @@ export function Rank(){
 
     },[user])
 
-    if(!user){
-        return <Loading></Loading>
+    async function handleClick(){
+
+        try{
+            window.location.href = "/ranking";
+            
+        } catch(error){
+            console.error("Erro!");
+        }
+
     }
 
     return(
         <Container>
             <Content>
                 <div className="user_ranking">
-                    <p className="user_position"> * </p>
+                    <p className="user_position"> {cont} </p>
                     <div className="userdetails">
                         <img src={photoURL} alt="foto do usuário" className="userprofilepic" />
                         <p className="username">{nome}</p>
@@ -100,6 +113,7 @@ export function Rank(){
                 <div className="filters">
                     <button>Global</button>
                     <button>Amigos</button>
+                    <button onClick={handleClick}>Atualizar</button>
                 </div>
 
                 <div className="others_ranking">
