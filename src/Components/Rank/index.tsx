@@ -66,7 +66,7 @@ export function Rank(){
         var userRef2 = db.collection('Users');
         setOthers_array(([]));
         // Manter limite de 4 usuários
-        userRef2.orderBy('value', 'desc').limit(4).get()
+        userRef2.orderBy('value', 'desc').get()
         .then((querySnapshot) => {
             const promises: any[] = [];
             querySnapshot.forEach((doc) => {

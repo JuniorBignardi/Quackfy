@@ -4,8 +4,8 @@ import { Container, Content } from './styles'
 //import profile from '../../assets/profile.svg'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { auth, db, upload } from '../../firebaseConfig'
-import { doc, getDoc } from 'firebase/firestore'
+import { auth, db, upload, uploadGoogle } from '../../firebaseConfig'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
 
  
 interface HeaderProps{
@@ -41,8 +41,18 @@ export function Header({handleOpenNewUserModal}:HeaderProps){
     const fetchUserData=async()=>{
         auth.onAuthStateChanged(async(user: any)=>{
             console.log(user);
+
             const docRef = doc(db, "Users", user.uid);
             const docSnap = await getDoc(docRef);
+
+            if(user?.emailVerified == true && !docSnap.exists()){
+                await setDoc(doc(db, "Users", user.uid),{
+                    email: user.email,
+                    name: user.displayName,
+                    value: 0
+                });
+                uploadGoogle(user, setLoading);
+            }
             
             if(docSnap.exists()) {
                 setUserDetails(docSnap.data() as userDetails);
@@ -70,6 +80,7 @@ export function Header({handleOpenNewUserModal}:HeaderProps){
             console.error("Erro!");
         }
     }
+
 
     return (
         <Container>
