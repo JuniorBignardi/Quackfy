@@ -19,12 +19,13 @@ export const Container = styled.div`
     .correct {
             background-color: var(--correct);
             color: white;
-            
+             pointer-events: none;
         }
 
     .incorrect {
             background-color: var(--incorrect);
             color: white;
+            pointer-events: none;
         }
 
     .question-number {
