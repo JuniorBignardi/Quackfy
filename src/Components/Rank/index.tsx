@@ -12,8 +12,8 @@ interface userDetails{
 
 export function Rank(){
 
-    const [others_array, setOthers_array] = useState<Array<{profilepic: any, name: any, pontuação: any, url: any}>>([
-    ]);
+    const [others_array, setOthers_array] = useState<Array<{profilepic: any, name: any, pontuação: any, url: any}>>([]);
+    const [others_array2, setOthers_array2] = useState<Array<{profilepic: any, name: any, pontuação: any, url: any}>>([]);
     const user = auth.currentUser;
     
     
@@ -38,10 +38,10 @@ export function Rank(){
         });
     };
 
-    for(var i = 0; i < others_array.length; i++)
-        if(others_array[i].url == user?.uid){
+    for(var i = 0; i < others_array2.length; i++)
+        if(others_array2[i].url == user?.uid){
             cont = i+1; 
-    }
+    } 
 
     useEffect(()=>{
         if (user?.photoURL) {
@@ -66,7 +66,7 @@ export function Rank(){
         var userRef2 = db.collection('Users');
         setOthers_array(([]));
         // Manter limite de 4 usuários
-        userRef2.orderBy('value', 'desc').get()
+        userRef2.orderBy('value', 'desc').limit(4).get()
         .then((querySnapshot) => {
             const promises: any[] = [];
             querySnapshot.forEach((doc) => {
@@ -81,6 +81,26 @@ export function Rank(){
             Promise.all(promises).then((results) => {
                 setOthers_array(results);
                 setOthers_array((vetorAnterior => vetorAnterior.sort((a, b) => b.pontuação - a.pontuação)));
+            });
+        })
+
+        var userRef3 = db.collection('Users');
+        setOthers_array2(([]));
+        userRef3.orderBy('value', 'desc').get()
+        .then((querySnapshot) => {
+            const promises: any[] = [];
+            querySnapshot.forEach((doc) => {
+                const promise = getDownloadURL(ref(storage, 'imagem/' + doc.id + '.png')).then((photoRef) => {
+                    // doc.data() is never undefined for query doc snapshots
+                    console.log(doc.id, " => ", doc.data().name);
+                    return {profilepic: photoRef, name: doc.data()?.name, pontuação: doc.data()?.value, url: doc.id};
+                });
+                promises.push(promise);
+            });
+
+            Promise.all(promises).then((results) => {
+                setOthers_array2(results);
+                setOthers_array2((vetorAnterior => vetorAnterior.sort((a, b) => b.pontuação - a.pontuação)));
             });
         })
 
@@ -102,17 +122,14 @@ export function Rank(){
             <Content>
                 <div className="user_ranking">
                     <p className="user_position"> {cont} </p>
-                    <div className="userdetails">
                         <img src={photoURL} alt="foto do usuário" className="userprofilepic" />
                         <p className="username">{nome}</p>
-                    </div>
                     <p className="user_points">
                         Pontuação: {pontuacao}
                     </p>
                 </div>
                 <div className="filters">
                     <button>Global</button>
-                    <button>Amigos</button>
                     <button onClick={handleClick}>Atualizar</button>
                 </div>
 

@@ -1,11 +1,20 @@
 import { Container, Content, Selector, Shadow } from "./styles"
 import medal from "../../assets/medal.svg"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { auth, db } from "../../firebaseConfig";
 import firebase from "firebase/compat/app";
 import { useNavigate } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+
+interface userDetails{
+    email: string;
+    name: string;
+    value: number;
+}
 
 export function ScoreBoard({score_correct}:{score_correct:number}){
+
+    const [, setUserDetails] = useState<userDetails | null>(null);
 
     const navigate = useNavigate()
     const user = auth.currentUser
@@ -15,7 +24,23 @@ export function ScoreBoard({score_correct}:{score_correct:number}){
         var bool = true;
     }
     
+    const fetchUserData=async()=>{
+        auth.onAuthStateChanged(async(user: any)=>{
+            console.log(user);
+            const docRef = doc(db, "Users", user.uid);
+            const docSnap = await getDoc(docRef);
+            
+            if(docSnap.exists()) {
+                setUserDetails(docSnap.data() as userDetails);
+                console.log(docSnap.data());
+            } else {
+                console.log("Usuário deslogado");
+            }
+        });
+    };
+
     useEffect(()=>{
+        fetchUserData();
         
         if(user != null){
             var resultRef = db.collection('Users').doc(user.uid);
@@ -33,7 +58,7 @@ export function ScoreBoard({score_correct}:{score_correct:number}){
                 console.log("Error", error);
             })  
         }
-    },[])
+    },[user])
 
     return(
         <>
