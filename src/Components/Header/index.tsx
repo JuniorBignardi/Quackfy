@@ -2,7 +2,7 @@ import logoImg from '../../assets/Logo.svg'
 import logoMobile from "../../assets/LogoMobile.svg"
 import { Container, Content } from './styles'
 //import profile from '../../assets/profile.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { auth, db, upload, uploadGoogle } from '../../firebaseConfig'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
@@ -21,6 +21,35 @@ interface userDetails{
 
 export function Header({handleOpenNewUserModal}:HeaderProps){
     const user = auth.currentUser;
+
+    const navigate = useNavigate();
+
+    const categories = [
+        {name: 'Cotidiano', value: 9},
+        {name:'Música', value: 12},
+        {name: 'Ciência', value:17},
+        {name: 'Esportes', value: 21},
+        {name: 'Geografia', value: 22},
+        {name: 'História', value: 23},
+        {name: 'Política', value: 24},
+        {name: 'Arte', value: 25},
+        {name: 'Celebridades', value: 26},
+        {name: 'Animais', value: 27},
+        {name: 'Veículos', value:28},
+        {name: 'Quadrinhos', value:29},
+        {name: 'Desenhos', value:32},
+        {name: 'Animes', value:31},
+        {name: "Matemática", value:19},
+        {name: 'Computação', value:18},
+        {name: 'Games', value:15},
+        {name: 'Televisão', value:14},
+        {name: 'Livros', value:10},
+        {name: 'Filmes', value:11},
+        {name: 'Mitologia', value:20},
+    ]
+    
+    const difficulty = ['easy','medium','hard']
+
 
     const [userDetails, setUserDetails] = useState<userDetails | null>(null);
     const [photo, setPhoto] = useState(null);
@@ -82,6 +111,12 @@ export function Header({handleOpenNewUserModal}:HeaderProps){
     }
 
 
+    function Random(){
+        const dif = difficulty[Math.floor(Math.random()*difficulty.length)]
+        const cat = categories[Math.floor(Math.random()*categories.length)].value
+        navigate(`/quiz/${cat}/${dif}`);
+    }
+
     return (
         <Container>
             <Content>
@@ -104,8 +139,8 @@ export function Header({handleOpenNewUserModal}:HeaderProps){
                     )}
                     </div>
                 </div>
-                <button className= 'criarQuiz' type="button">
-                    Criar Quiz
+                <button className= 'criarQuiz' type="button" onClick={Random}>
+                    Random
                 </button>
             </div>
             </Content>

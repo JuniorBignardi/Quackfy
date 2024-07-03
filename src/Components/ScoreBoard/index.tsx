@@ -73,7 +73,7 @@ export function ScoreBoard({score_correct}:{score_correct:number}){
                     </Shadow>
                 </Content>
             </div>
-            <Selector>Reiniciar Quiz</Selector>
+            <Selector onClick={()=>navigate('/')}>Home</Selector>
             <Selector disabled={bool || !user} onClick={()=>navigate('/ranking') }>Ranking</Selector>
         </Container>
         </>
