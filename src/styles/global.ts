@@ -69,4 +69,26 @@ export const GlobalStyle = createGlobalStyle`
         position: relative;
         border-radius: 25px;
     }
+    
+
+    .react-modal-overlay-cards{
+        background: rgba(0,0,0,0.8);
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content:center;
+    }
+
+    .react-modal-content-cards{
+        width: 100%;
+        max-width: 576px;
+        padding: 2.5rem;
+        position: relative;
+        border-radius: 25px;
+    }
 `

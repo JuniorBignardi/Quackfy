@@ -83,12 +83,15 @@ export const Container = styled.div`
         border-radius: 40px;
         width: 100%;
         max-width: 120vh;
-        height: 20vh;
+        height: auto; /* Ajusta a altura automaticamente com base no conteúdo */
+        padding: 10px; /* Adiciona padding para espaçamento interno */
+        overflow-wrap: break-word; /* Quebra palavras longas */
+        word-wrap: break-word; /* Suporte para navegadores mais antigos */
+        overflow: auto; /* Evita que o conteúdo transborde */
     
     
         p {
             text-align: center;
-            margin-top: 10px;
             margin-left: 30px;
         }
 
@@ -118,6 +121,9 @@ export const Content = styled.div`
     
     text-align: left;
     background-color: #00221C;
+    background: linear-gradient(to left, #00221C 50%, #00221C 50%) right;
+    background-size: 200%;
+    transition: .5s ease-out;
 
     font-size: 2.0rem;
     font-family: "Lexend", sans-serif;        
@@ -134,11 +140,19 @@ export const Content = styled.div`
     cursor: pointer;
 
         &.correct {
-            background-color: var(--correct)
+            pointer-events: none;
+            background: linear-gradient(to left, #00221C 50%, var(--correct) 50%) right;
+            background-size: 200%;
+            transition: .5s ease-out;
+            background-position: left;
         }
 
         &.incorrect {
-            background-color: var(--incorrect)
+            pointer-events: none;
+            background: linear-gradient(to left, #00221C 50%, var(--incorrect) 50%) right;
+            background-size: 200%;
+            transition: .5s ease-out;
+            background-position: left;
         }
 
     p {

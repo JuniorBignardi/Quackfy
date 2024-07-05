@@ -46,9 +46,9 @@ const shuffleArray = (array: any) => {
 };
 
 const components = [
-    {component: Card_small, props: {src:'https://www.petz.com.br/blog/wp-content/uploads/2019/07/vida-de-gato.jpg',alt: 'gatito',title:"gatos",description:"gatinhosinhos"}},
-    {component: Card_medium, props: {src:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8YCbLchWBk9jQ1mkgk0An8SjFpJz88cEzNA&s',alt: 'cachorro',title:"cachorros",description:"cachorrinhos"}},
-    {component: Card_large, props: {src:'https://aquatividade.com.br/wp-content/uploads/2023/12/Bagre-Africano.jpg',alt: 'bagre',title:"bagrinho",description:"bagres"}},
+    {component: Card_small},
+    {component: Card_medium},
+    {component: Card_large},
 ]
 
 

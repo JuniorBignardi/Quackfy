@@ -71,7 +71,7 @@ export function Question(){
                     })}
                 </div>
                  <main className="questao">
-                    <p>{decode(currentQuestion.question)}</p>
+                    <p className="question-text">{decode(currentQuestion.question)}</p>
                  </main>
                 <div className="options">
                     {currentQuestion.incorrect_answers.map(function(answer,indice){
