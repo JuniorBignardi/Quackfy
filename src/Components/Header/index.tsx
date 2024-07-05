@@ -2,10 +2,10 @@ import logoImg from '../../assets/Logo.svg'
 import logoMobile from "../../assets/LogoMobile.svg"
 import { Container, Content } from './styles'
 //import profile from '../../assets/profile.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { auth, db, upload } from '../../firebaseConfig'
-import { doc, getDoc } from 'firebase/firestore'
+import { auth, db, upload, uploadGoogle } from '../../firebaseConfig'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
 
  
 interface HeaderProps{
@@ -21,6 +21,35 @@ interface userDetails{
 
 export function Header({handleOpenNewUserModal}:HeaderProps){
     const user = auth.currentUser;
+
+    const navigate = useNavigate();
+
+    const categories = [
+        {name: 'Cotidiano', value: 9},
+        {name:'Música', value: 12},
+        {name: 'Ciência', value:17},
+        {name: 'Esportes', value: 21},
+        {name: 'Geografia', value: 22},
+        {name: 'História', value: 23},
+        {name: 'Política', value: 24},
+        {name: 'Arte', value: 25},
+        {name: 'Celebridades', value: 26},
+        {name: 'Animais', value: 27},
+        {name: 'Veículos', value:28},
+        {name: 'Quadrinhos', value:29},
+        {name: 'Desenhos', value:32},
+        {name: 'Animes', value:31},
+        {name: "Matemática", value:19},
+        {name: 'Computação', value:18},
+        {name: 'Games', value:15},
+        {name: 'Televisão', value:14},
+        {name: 'Livros', value:10},
+        {name: 'Filmes', value:11},
+        {name: 'Mitologia', value:20},
+    ]
+    
+    const difficulty = ['easy','medium','hard']
+
 
     const [userDetails, setUserDetails] = useState<userDetails | null>(null);
     const [photo, setPhoto] = useState(null);
@@ -38,42 +67,24 @@ export function Header({handleOpenNewUserModal}:HeaderProps){
 
     }
 
-/*
-    const handleUpload = (e: any) => {
-        const file = e.target[0]?.files[0]
-        if(!file)
-            return;
-        if(user){
-            const storageRef = ref(storage, `imagem/${user.uid}/${file.name}`)
-            const uploadTask = uploadBytesResumable(storageRef, file)
-
-            uploadTask.on(
-                "state_changed",
-                snapshot => {
-                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                    setProgress(progress)
-                },
-                error => {
-                    alert(error)
-                },
-                () => {
-                    getDownloadURL(uploadTask.snapshot.ref).then(url  => {
-                        setPhotoURL(url)
-                    })
-                }
-            )
-        }
-}  
-*/
     const fetchUserData=async()=>{
         auth.onAuthStateChanged(async(user: any)=>{
             console.log(user);
+
             const docRef = doc(db, "Users", user.uid);
             const docSnap = await getDoc(docRef);
+
+            if(user?.emailVerified == true && !docSnap.exists()){
+                await setDoc(doc(db, "Users", user.uid),{
+                    email: user.email,
+                    name: user.displayName,
+                    value: 0
+                });
+                uploadGoogle(user, setLoading);
+            }
             
             if(docSnap.exists()) {
                 setUserDetails(docSnap.data() as userDetails);
-                console.log("eu to aq")
                 console.log(docSnap.data());
             } else {
                 console.log("Usuário deslogado");
@@ -99,6 +110,13 @@ export function Header({handleOpenNewUserModal}:HeaderProps){
         }
     }
 
+
+    function Random(){
+        const dif = difficulty[Math.floor(Math.random()*difficulty.length)]
+        const cat = categories[Math.floor(Math.random()*categories.length)].value
+        navigate(`/quiz/${cat}/${dif}`);
+    }
+
     return (
         <Container>
             <Content>
@@ -121,8 +139,8 @@ export function Header({handleOpenNewUserModal}:HeaderProps){
                     )}
                     </div>
                 </div>
-                <button className= 'criarQuiz' type="button">
-                    Criar Quiz
+                <button className= 'criarQuiz' type="button" onClick={Random}>
+                    Random
                 </button>
             </div>
             </Content>

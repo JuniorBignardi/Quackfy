@@ -8,11 +8,11 @@ const Results = () =>{
 
     const {state} = useLocation();
 
-    const {score_correct,score_incorrect} = state;
+    const {score_correct} = state;
 
     return(
         <>
-            <ScoreBoard score_correct={score_correct} score_incorrect={score_incorrect}/>
+            <ScoreBoard score_correct={score_correct}/>
         </>
     )
 }

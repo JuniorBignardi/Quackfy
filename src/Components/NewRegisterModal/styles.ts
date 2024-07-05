@@ -1,11 +1,19 @@
 import styled from "styled-components";
 
-export const Container = styled.form`
+export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 12px;
+
+    form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    }
 
     h1{
         text-align: center;

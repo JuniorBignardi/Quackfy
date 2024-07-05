@@ -2,7 +2,7 @@ import Modal from "react-modal";
 import { Container } from "./styles";
 import GoogleLogo from "../../assets/google.svg"
 import QuackfyLogo from "../../assets/quackfylogo.svg"
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { useState } from "react";
 import { auth } from "../../firebaseConfig";
 
@@ -11,6 +11,7 @@ interface NewUserModalProps{
     onRequestClose: () => void;
     handle: () => void;
 }
+
 
 export function NewUserModal({isOpen,onRequestClose, handle}:NewUserModalProps){
       
@@ -31,6 +32,14 @@ export function NewUserModal({isOpen,onRequestClose, handle}:NewUserModalProps){
         }
     }
 
+    const handleGoogle = (e: any) => {
+
+        e.preventDefault();
+        const provider = new GoogleAuthProvider();
+        console.log("Usuário loggado com sucesso!")
+        return signInWithPopup(auth, provider)
+    }
+
     return(
         <Modal 
         isOpen={isOpen} 
@@ -38,34 +47,35 @@ export function NewUserModal({isOpen,onRequestClose, handle}:NewUserModalProps){
         overlayClassName='react-modal-overlay'
         className='react-modal-content'
         >
-                <Container onSubmit={handleSubmit}>
+                <Container>
                     <img className="quackfy" src={QuackfyLogo} alt="Logo do site de Quiz Quackfy" />
                     <h1>Faça seu login ou cadastre-se para acessar todos os conteúdos disponíveis</h1>
-                    
-                <div>
-                <label htmlFor="">E-mail:</label>
-                <br />
-                    <input type="text" 
-                    name="femail" 
-                    id="feamil" 
-                    placeholder="Endereço de e-mail" 
-                    onChange={(e) => setEmail(e.target.value)} required/>
-                </div>
-
-                    <div>
-                        <label htmlFor="">Senha:</label>
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                        <label htmlFor="">E-mail:</label>
                         <br />
-                        <input type="password" 
-                        name="fsenha" 
-                        id="fsenha" 
-                        placeholder="Senha"  
-                        onChange={(e) => setPassword(e.target.value)} required/>
-                    </div>
+                            <input type="text" 
+                            name="femail" 
+                            id="feamil" 
+                            placeholder="Endereço de e-mail" 
+                            onChange={(e) => setEmail(e.target.value)} required/>
+                        </div>
 
-                    <button  className="entrar" type="submit" >Entrar</button>
+                        <div>
+                            <label htmlFor="">Senha:</label>
+                            <br />
+                            <input type="password" 
+                            name="fsenha" 
+                            id="fsenha" 
+                            placeholder="Senha"  
+                            onChange={(e) => setPassword(e.target.value)} required/>
+                        </div>
+
+                        <button  className="entrar" type="submit" >Entrar</button>
+                    </form>
 
                     <p>Caso ainda não tenha uma conta, <a onClick={handle}>cadastre-se aqui</a> ou utilize sua conta do Google</p>
-                    <button className="google"><img src={GoogleLogo} alt="botão de login com o Google" /></button>
+                    <button className="google" onClick={handleGoogle} ><img src={GoogleLogo} alt="botão de login com o Google" /></button>
 
                 </Container>
         </Modal>

@@ -44,7 +44,29 @@ export async function upload(file: any, currentUser: any, setLoading:  any) {
     const fileRef = ref(storage, 'imagem/' + currentUser.uid + '.png');
 
     setLoading(true);
-    const snapshot = await uploadBytes(fileRef, file);
+    const metadata = {
+        contentType: 'image/png',
+    };
+    const snapshot = await uploadBytes(fileRef, file, metadata);
+    console.log(snapshot);
+
+    const photoURL = await getDownloadURL(fileRef);
+
+    updateProfile(currentUser, {photoURL});
+
+    setLoading(false);
+    alert("Uploading file!");
+    window.location.href="/";
+}
+
+export async function uploadGoogle(currentUser: any, setLoading:  any) {
+    const fileRef = ref(storage, 'imagem/' + currentUser.uid + '.png');
+
+    setLoading(true);
+    const metadata = {
+        contentType: 'image/png',
+    };
+    const snapshot = await uploadBytes(fileRef, currentUser.photoURL, metadata);
     console.log(snapshot);
 
     const photoURL = await getDownloadURL(fileRef);
