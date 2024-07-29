@@ -31,12 +31,7 @@ npm run dev # executa a aplicação em modo desenvolvedor
 * Rank: Apresenta a posição de todos os usuários que já criaram uma conta, inclusive a do usuário logado.
 * ScoreBoard: Aparece quando termina as perguntas de um respectivo quiz, apresenta a pontuação do usuário e, se o mesmo estiver logado, disponibiliza o botão para acessar o ranking.
 * Search: Permite filtrar os quizes por categoria na página inicial.
-## Tecnologias usadas:
-* React.js
-* Styled components
-* Firebase
-* Typescript
-* Vercel
+
 
 <div align="center">
 <h2>Tecnologias usadas 💻</h2>
